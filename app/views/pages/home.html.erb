@@ -1,0 +1,20 @@
+<%
+require 'amadeus'
+require 'json'
+require 'open-uri'
+
+user_origin = 'LHR'
+
+amadeus = Amadeus::Client.new({
+  client_id: 'lmGi2675TK9VnEYAEYrEtk1WFygIyIJm',
+  client_secret: 'GtpViCkhwQTYoBEg'
+})
+%>
+<%  response = amadeus.shopping.flight_destinations.get(origin: 'MAD') %>
+ <% leggo = response.data %>
+ <% leggo.each do |flight| %>
+ <%= flight["price"] %>
+ <%= flight["destination"] %>
+ <%= flight["departureDate"] %>
+ <%= flight["returnDate"] %> <br>
+<% end %>
