@@ -10,11 +10,16 @@ amadeus = Amadeus::Client.new({
   client_secret: 'GtpViCkhwQTYoBEg'
 })
 %>
+
+<h1> See the best deals from your destination! </h1>
+<h5> From <%= origin_var %> %>
+
 <%  response = amadeus.shopping.flight_destinations.get(origin: 'MAD') %>
  <% leggo = response.data %>
  <% leggo.each do |flight| %>
- <%= flight["price"] %>
- <%= flight["destination"] %>
- <%= flight["departureDate"] %>
- <%= flight["returnDate"] %> <br>
+
+<p> Total Price: <%= flight["price"]["total"] %></p>
+<p>Destination: <%= flight["destination"] %></p>
+<p> Departure Date: <%= flight["departureDate"] %> </p>
+<p>Return Date: <%= flight["returnDate"] %></p> <br>
 <% end %>
